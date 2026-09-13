@@ -1,0 +1,5 @@
+node_modules/
+__pycache__/
+*.pyc
+/tools/x-read/outputs/
+/tools/x-read/test-output/

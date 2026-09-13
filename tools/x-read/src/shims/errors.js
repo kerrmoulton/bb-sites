@@ -1,0 +1,2 @@
+export class CliError extends Error{constructor(message,...extra){super(message);this.name=this.constructor.name;this.details=extra;}}
+export class ArgumentError extends CliError{};export class AuthRequiredError extends CliError{constructor(site,message){super(message||site);}};export class CommandExecutionError extends CliError{};export class EmptyResultError extends CliError{constructor(subject,message){super(message||subject);this.subject=subject;}};export class TimeoutError extends CliError{};export class LoginWallError extends CliError{};

@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "files": {
+    "tools/x-read/NOTICE.md": "7946246e2277f1fdc4a808f24eef3b6b4b8b82ddb4c476b5f8c95b8bbdf86438",
+    "tools/x-read/OPENCLI-LICENSE.txt": "0210b8b66cf00358242cb921ba2be3a46dfe0190159b1b952388a3880ce1ff54",
+    "tools/x-read/commands.json": "8f062be939371d8d308c644e8b08a35cebce710caa6ba9010b265d7d91589f26",
+    "tools/x-read/xread.py": "7af09e397d67bdfb4ebdfebf61f005dab07b729cac054d4b501ce57cbd8021f0",
+    "twitter/_helper.js": "c99d47d3b5f4f65605ebd568c04ad4558c391cb1ecf39c5fcfa7f24a61baa73b",
+    "twitter/read-article.js": "771163f2fda8d18d20508bf1c4e0607e1a2dc38eb62d3d4f7f8fd6494836dadc",
+    "twitter/read-bookmark-folder.js": "692c8d564df71cbb6fd51615753eb0b6892295d81041020416487fef29bef56c",
+    "twitter/read-bookmark-folders.js": "25762d37a7c5725b67e270333f5b538338f2c54824b64f59b93f7c522be98188",
+    "twitter/read-bookmarks.js": "2b20fbb337c750e8f1a15c4748b6638cb88c8e6ddd48732e4223230f489266ca",
+    "twitter/read-collection.js": "6e47f73f4f3b48fc19f709ed8837baee54e4c91969e7412a56b692b5f2efd536",
+    "twitter/read-device-follow.js": "8b6b814126cbbd05eed6aeef7ae6f462157bbfae2199b6a9f216bb77c3df5ebe",
+    "twitter/read-download.js": "0e81e8045d94e42c013d8aba844ad53922e3ffa7bbd2abb04933c184c0bf1a7c",
+    "twitter/read-followers.js": "cc7bf9f1a443276efb18dcbd9351f63ef06c44f9957a2f411385e8490f165d25",
+    "twitter/read-following.js": "66cc7bb53c634d9f21a71113a09f0128648454a9eef3f1b8c148a6fd088cc86e",
+    "twitter/read-likes.js": "0dd9a07409a3aa811d86b2310a6f6d67cd85d00032b8adf65ea6feefad5fc651",
+    "twitter/read-list-tweets.js": "0be9c4b8d737aa35029f0c8d983556ad0e531251674b706cf67b8f3d12c7e415",
+    "twitter/read-lists.js": "f3dfd9266bfb7c78724a235ebece303316a0269eea3686fe181ec7de66a60d1e",
+    "twitter/read-notifications.js": "df8713398e7e32f2eac5eb8e2bc98e0f7c558845d64590a599392b8bc5ac85e1",
+    "twitter/read-profile.js": "eb8e1477b5f7fecda8f7c401bd8b291bc7fe1a21cf60ca97dbd1b6a12fef8e9c",
+    "twitter/read-search.js": "4063aed3c36122cdfe50933f24266276b063160658fa225370b0b26247a07030",
+    "twitter/read-thread.js": "222c456437470315be0c120aacee7548972d4a726e10276e86335e1465f136a7",
+    "twitter/read-timeline.js": "264104b8854c82cdbf2b8cb170d6f0eaa9108ad5cd87fe1bffd0495af28a0970",
+    "twitter/read-trending.js": "a686bccb17517381089b1d9e140f3b4cca8ce02e29af47d6d6a6e867e76aa654",
+    "twitter/read-tweets.js": "6be2d061a843f289a05dbed9037414b4a078267d83844589f4853899c6a62496",
+    "twitter/read-whoami.js": "e7e31bd07ff1c69ca8d61c939f1559ae952625ca4c51281a588b040404c77629"
+  }
+}

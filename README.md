@@ -8,6 +8,20 @@ Each site adapter is a JS function that runs inside your browser via `bb-browser
 
 > **102 adapters** across **36 platforms** — and growing.
 
+## This fork: repaired X read adapters
+
+This fork includes 20 repaired X read adapters, buildable sources, regression tests and an installer. BB Browser itself is unchanged. Use `bb-xread` or `twitter/read-*` for the enhanced commands; legacy adapter names retain their previous behavior.
+
+```sh
+npm install -g bb-browser
+git clone https://github.com/kerrmoulton/bb-sites.git
+cd bb-sites
+python3 tools/x-read/install.py
+~/.local/bin/bb-xread tweets follow_clues --limit 20
+```
+
+For an existing checkout: `git pull --ff-only`, then rerun the installer. It backs up changed files and installs into the private sites directory so community `site update` does not overwrite the enhanced suite. See [X read capabilities, limitations and usage](twitter/README.x-read.md) and [source/license notice](tools/x-read/NOTICE.md).
+
 ## Quick Start
 
 ```bash

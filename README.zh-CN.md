@@ -8,6 +8,20 @@
 
 > **102 个适配器**，覆盖 **36 个平台** — 持续增长中。
 
+## 此 fork：修复后的 X 只读适配器
+
+包含20个增强版X适配器、可重建源码、回归测试和安装器。使用 `bb-xread` 或 `twitter/read-*` 调用增强版；原有命令保持兼容，BB Browser核心没有改动。
+
+```sh
+npm install -g bb-browser
+git clone https://github.com/kerrmoulton/bb-sites.git
+cd bb-sites
+python3 tools/x-read/install.py
+~/.local/bin/bb-xread tweets follow_clues --limit 20
+```
+
+以后在本仓库执行 `git pull --ff-only`，再运行安装器即可更新。它会备份旧文件并部署到私有站点目录，社区 `site update` 不会覆盖增强版。[能力、边界及详细使用说明](twitter/README.x-read.md) · [源码与许可说明](tools/x-read/NOTICE.md)。
+
 ## 快速开始
 
 ```bash

@@ -1,0 +1,1103 @@
+[
+  {
+    "command": "twitter/article",
+    "site": "twitter",
+    "name": "article",
+    "aliases": [],
+    "description": "Fetch a Twitter Article (long-form content) and export as Markdown",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "tweet-id",
+        "type": "string",
+        "required": true,
+        "valueRequired": false,
+        "positional": true,
+        "choices": [],
+        "default": null,
+        "help": "Tweet ID or URL containing the article"
+      }
+    ],
+    "columns": [
+      "title",
+      "author",
+      "content",
+      "url"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter article <tweet-id> -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/bookmark-folder",
+    "site": "twitter",
+    "name": "bookmark-folder",
+    "aliases": [],
+    "description": "Read the tweets inside a single Twitter/X bookmark folder. Get the folder id from `opencli twitter bookmark-folders`.",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "folder-id",
+        "type": "string",
+        "required": true,
+        "valueRequired": false,
+        "positional": true,
+        "choices": [],
+        "default": null,
+        "help": "Folder id from `opencli twitter bookmark-folders`."
+      },
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 20,
+        "help": "Maximum number of bookmarks to return (default 20)."
+      },
+      {
+        "name": "top-by-engagement",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 0,
+        "help": "When set to N>0, re-rank the folder by weighted engagement (likes×1 + retweets×3 + replies×2 + bookmarks×5 + log10(views+1)×0.5) and return the top N. Default 0 keeps the API's native (saved-time) ordering."
+      }
+    ],
+    "columns": [
+      "id",
+      "author",
+      "text",
+      "likes",
+      "retweets",
+      "bookmarks",
+      "created_at",
+      "url",
+      "has_media",
+      "media_urls",
+      "media_posters"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter bookmark-folder <folder-id> -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/bookmark-folders",
+    "site": "twitter",
+    "name": "bookmark-folders",
+    "aliases": [],
+    "description": "List your Twitter/X bookmark folders (the user-created collections under Bookmarks). Returns folder id, name, item count, and created_at.",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [],
+    "columns": [
+      "id",
+      "name",
+      "items",
+      "created_at"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter bookmark-folders -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/bookmarks",
+    "site": "twitter",
+    "name": "bookmarks",
+    "aliases": [],
+    "description": "Fetch your Twitter/X bookmarks (the logged-in user's saved tweets, newest first)",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 20,
+        "help": "Maximum number of bookmarks to return (default 20). Ignored when --all is set."
+      },
+      {
+        "name": "all",
+        "type": "bool",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": false,
+        "help": "Fetch all bookmark pages until exhausted. Prefer --output-file for large archives."
+      },
+      {
+        "name": "resume-file",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": null,
+        "help": "Resume file for long-running all-pages bookmark syncs."
+      },
+      {
+        "name": "output-file",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": null,
+        "help": "Write all-page results to JSONL. Requires --all and --resume-file."
+      },
+      {
+        "name": "max-pages",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": null,
+        "help": "Optional pagination safety cap (default 100; raised automatically with --all)."
+      },
+      {
+        "name": "top-by-engagement",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 0,
+        "help": "When set to N>0, re-rank the bookmarks by weighted engagement (likes×1 + retweets×3 + replies×2 + bookmarks×5 + log10(views+1)×0.5) and return the top N. Default 0 keeps the API's native (saved-time) ordering. Incompatible with --output-file."
+      }
+    ],
+    "columns": [
+      "id",
+      "author",
+      "text",
+      "likes",
+      "retweets",
+      "bookmarks",
+      "created_at",
+      "url",
+      "has_media",
+      "media_urls",
+      "media_posters"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter bookmarks -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/collection",
+    "site": "twitter",
+    "name": "collection",
+    "aliases": [],
+    "description": "Fetch a user timeline with relationship facts and a bounded completion receipt.",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "username",
+        "type": "string",
+        "required": true,
+        "valueRequired": false,
+        "positional": true,
+        "choices": [],
+        "default": null,
+        "help": "Twitter screen name (with or without @)."
+      },
+      {
+        "name": "until",
+        "type": "string",
+        "required": true,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": null,
+        "help": "RFC3339 lower time boundary that must be reached or exhausted."
+      },
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 10000,
+        "help": "Safety ceiling; reaching it is a typed failure."
+      },
+      {
+        "name": "page-delay",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 2,
+        "help": "Seconds to wait between cursor pages."
+      }
+    ],
+    "columns": [
+      "posts",
+      "receipt"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter collection <username> --until <until> -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/device-follow",
+    "site": "twitter",
+    "name": "device-follow",
+    "aliases": [],
+    "description": "Read the /i/timeline device-follow notification stream (tweets aggregated under a bell-icon \"new posts from @userA and N others\" notification)",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 20,
+        "help": "Maximum number of tweets to return (1-200, default 20)"
+      },
+      {
+        "name": "top-by-engagement",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 0,
+        "help": "When set to N>0, re-rank by weighted engagement and return the top N. Default 0 keeps upstream ordering."
+      }
+    ],
+    "columns": [
+      "id",
+      "author",
+      "text",
+      "likes",
+      "retweets",
+      "replies",
+      "views",
+      "created_at",
+      "url"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter device-follow -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/download",
+    "site": "twitter",
+    "name": "download",
+    "aliases": [],
+    "description": "Download Twitter/X media (images and videos). Provide either <username> to fetch every media item from their profile via the GraphQL UserMedia endpoint with cursor pagination, or --tweet-url to download a single tweet.",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "username",
+        "type": "str",
+        "required": false,
+        "valueRequired": false,
+        "positional": true,
+        "choices": [],
+        "default": null,
+        "help": "Twitter username (with or without @) to scan their profile media. Either <username> or --tweet-url is required."
+      },
+      {
+        "name": "tweet-url",
+        "type": "str",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": null,
+        "help": "Single tweet URL to download. Use this OR <username>, not both required at once."
+      },
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 10,
+        "help": "Maximum number of media items to download when scanning a profile (default 10). Ignored when --tweet-url is used."
+      },
+      {
+        "name": "output",
+        "type": "str",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": "./twitter-downloads",
+        "help": "Output directory (default ./twitter-downloads). A per-source subdir is created inside."
+      }
+    ],
+    "columns": [
+      "index",
+      "tweet_id",
+      "url",
+      "type",
+      "status",
+      "size"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter download -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/followers",
+    "site": "twitter",
+    "name": "followers",
+    "aliases": [],
+    "description": "Get accounts following a Twitter/X user (defaults to the logged-in user when no user is given)",
+    "access": "read",
+    "strategy": "ui",
+    "browser": true,
+    "args": [
+      {
+        "name": "user",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": true,
+        "choices": [],
+        "default": null,
+        "help": "Twitter/X handle (with or without @). Omit to fetch followers of the currently logged-in account."
+      },
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 50,
+        "help": "Maximum number of follower rows to return (default 50). Must be a positive integer."
+      }
+    ],
+    "columns": [
+      "screen_name",
+      "name",
+      "bio"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter followers -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/following",
+    "site": "twitter",
+    "name": "following",
+    "aliases": [],
+    "description": "Get accounts a Twitter/X user is following (defaults to the logged-in user when no user is given)",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "user",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": true,
+        "choices": [],
+        "default": null,
+        "help": "Twitter/X handle (with or without @). Omit to fetch the accounts the currently logged-in user follows."
+      },
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 50,
+        "help": "Maximum number of following rows to return (default 50). Must be a positive integer."
+      }
+    ],
+    "columns": [
+      "screen_name",
+      "name",
+      "bio",
+      "followers"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter following -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/likes",
+    "site": "twitter",
+    "name": "likes",
+    "aliases": [],
+    "description": "Fetch liked tweets of a Twitter user (defaults to the logged-in user when no username is given)",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "username",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": true,
+        "choices": [],
+        "default": null,
+        "help": "Twitter screen name (with or without @). Defaults to the logged-in user when omitted."
+      },
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 20,
+        "help": "Maximum number of liked tweets to return (default 20). Ignored when --all is set."
+      },
+      {
+        "name": "all",
+        "type": "bool",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": false,
+        "help": "Fetch all liked-tweet pages until exhausted. Prefer --output-file for large archives."
+      },
+      {
+        "name": "resume-file",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": null,
+        "help": "Resume file for long-running all-pages likes syncs."
+      },
+      {
+        "name": "output-file",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": null,
+        "help": "Write all-page results to JSONL. Requires --all and --resume-file."
+      },
+      {
+        "name": "max-pages",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": null,
+        "help": "Optional pagination safety cap (default 100; raised automatically with --all)."
+      },
+      {
+        "name": "top-by-engagement",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 0,
+        "help": "When set to N>0, re-rank the liked tweets by weighted engagement (likes×1 + retweets×3 + replies×2 + bookmarks×5 + log10(views+1)×0.5) and return the top N. Default 0 keeps the API's native (recency) ordering. Incompatible with --output-file."
+      }
+    ],
+    "columns": [
+      "id",
+      "author",
+      "name",
+      "text",
+      "likes",
+      "retweets",
+      "created_at",
+      "url",
+      "has_media",
+      "media_urls",
+      "media_posters"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter likes -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/list-tweets",
+    "site": "twitter",
+    "name": "list-tweets",
+    "aliases": [],
+    "description": "Fetch tweets from a Twitter/X list timeline",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "listId",
+        "type": "string",
+        "required": true,
+        "valueRequired": false,
+        "positional": true,
+        "choices": [],
+        "default": null,
+        "help": "Numeric ID of a Twitter/X list (e.g. from `opencli twitter lists`)"
+      },
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 50,
+        "help": ""
+      },
+      {
+        "name": "top-by-engagement",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 0,
+        "help": "When set to N>0, re-rank the list timeline by weighted engagement (likes×1 + retweets×3 + replies×2 + bookmarks×5 + log10(views+1)×0.5) and return the top N. Default 0 keeps the list's native (recency) ordering."
+      }
+    ],
+    "columns": [
+      "id",
+      "author",
+      "bio",
+      "text",
+      "likes",
+      "retweets",
+      "replies",
+      "created_at",
+      "url",
+      "has_media",
+      "media_urls",
+      "media_posters",
+      "card",
+      "quoted_tweet"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter list-tweets <listId> -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/lists",
+    "site": "twitter",
+    "name": "lists",
+    "aliases": [],
+    "description": "Get Twitter/X lists for the logged-in user (owned + subscribed)",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 50,
+        "help": "Maximum number of lists to return (default 50)."
+      }
+    ],
+    "columns": [
+      "id",
+      "name",
+      "members",
+      "followers",
+      "mode"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter lists -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/notifications",
+    "site": "twitter",
+    "name": "notifications",
+    "aliases": [],
+    "description": "Get your Twitter/X notifications (the logged-in user's likes/replies/follows feed, newest first)",
+    "access": "read",
+    "strategy": "intercept",
+    "browser": true,
+    "args": [
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 20,
+        "help": "Maximum number of notifications to return (default 20)."
+      }
+    ],
+    "columns": [
+      "id",
+      "action",
+      "author",
+      "text",
+      "url"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter notifications -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/profile",
+    "site": "twitter",
+    "name": "profile",
+    "aliases": [],
+    "description": "Fetch a Twitter user profile — bio, stats, etc. (defaults to the logged-in user when no username is given)",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "username",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": true,
+        "choices": [],
+        "default": null,
+        "help": "Twitter screen name (with or without @). Defaults to the logged-in user when omitted."
+      }
+    ],
+    "columns": [
+      "screen_name",
+      "name",
+      "bio",
+      "location",
+      "url",
+      "followers",
+      "following",
+      "tweets",
+      "likes",
+      "verified",
+      "created_at"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter profile -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/search",
+    "site": "twitter",
+    "name": "search",
+    "aliases": [],
+    "description": "Search Twitter/X for tweets, with optional --from / --has / --exclude / --product filters mapped to X's search operators",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "query",
+        "type": "string",
+        "required": true,
+        "valueRequired": false,
+        "positional": true,
+        "choices": [],
+        "default": null,
+        "help": "Search query. Raw X operators (e.g. \"exact phrase\", #tag, OR, lang:en, since:YYYY-MM-DD, from:, since:) are passed through unchanged."
+      },
+      {
+        "name": "filter",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [
+          "top",
+          "live"
+        ],
+        "default": "top",
+        "help": "Legacy alias for --product. Kept for backwards compatibility; if --product is set it wins."
+      },
+      {
+        "name": "product",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [
+          "top",
+          "live",
+          "photos",
+          "videos"
+        ],
+        "default": null,
+        "help": "Which X search tab to read: top (default), live (Latest), photos, videos. Maps to the f= URL param."
+      },
+      {
+        "name": "from",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": null,
+        "help": "Restrict to tweets authored by <user>. Leading @ is stripped. Equivalent to appending `from:<user>` to the query."
+      },
+      {
+        "name": "has",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [
+          "media",
+          "images",
+          "videos",
+          "links",
+          "replies"
+        ],
+        "default": null,
+        "help": "Restrict to tweets that have media|images|videos|links|replies. Maps to X's `filter:<has>` operator."
+      },
+      {
+        "name": "exclude",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [
+          "replies",
+          "retweets",
+          "media",
+          "links"
+        ],
+        "default": null,
+        "help": "Exclude tweets matching <type>: replies|retweets|media|links. Maps to X's `-filter:<x>` operator (retweets → -filter:nativeretweets)."
+      },
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 15,
+        "help": "Maximum number of tweets to return (default 15). Result count after server-side filtering."
+      },
+      {
+        "name": "top-by-engagement",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 0,
+        "help": "When set to N>0, re-rank the results by weighted engagement (likes×1 + retweets×3 + replies×2 + bookmarks×5 + log10(views+1)×0.5) and return the top N. Default 0 keeps X's native ordering."
+      }
+    ],
+    "columns": [
+      "id",
+      "author",
+      "bio",
+      "text",
+      "created_at",
+      "likes",
+      "views",
+      "url",
+      "has_media",
+      "media_urls",
+      "media_posters",
+      "card",
+      "quoted_tweet"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter search <query> -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/thread",
+    "site": "twitter",
+    "name": "thread",
+    "aliases": [],
+    "description": "Get a tweet thread (original + all replies)",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "tweet-id",
+        "type": "string",
+        "required": true,
+        "valueRequired": false,
+        "positional": true,
+        "choices": [],
+        "default": null,
+        "help": "Tweet numeric ID (e.g. 1234567890) or full status URL"
+      },
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 50,
+        "help": ""
+      },
+      {
+        "name": "top-by-engagement",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 0,
+        "help": "When set to N>0, re-rank the thread by weighted engagement (likes×1 + retweets×3 + replies×2 + bookmarks×5 + log10(views+1)×0.5) and return the top N. Default 0 keeps the conversation's structural ordering."
+      }
+    ],
+    "columns": [
+      "id",
+      "author",
+      "bio",
+      "text",
+      "likes",
+      "retweets",
+      "url",
+      "has_media",
+      "media_urls",
+      "media_posters",
+      "card",
+      "quoted_tweet"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter thread <tweet-id> -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/timeline",
+    "site": "twitter",
+    "name": "timeline",
+    "aliases": [],
+    "description": "Fetch the logged-in user's home timeline (for-you algorithmic feed by default; pass --type following for the chronological feed of accounts you follow)",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "type",
+        "type": "str",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [
+          "for-you",
+          "following"
+        ],
+        "default": "for-you",
+        "help": "Which home-timeline feed to read. Default for-you (algorithmic). Use following for the chronological feed of accounts you follow."
+      },
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 20,
+        "help": "Maximum number of tweets to return (default 20)."
+      },
+      {
+        "name": "top-by-engagement",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 0,
+        "help": "When set to N>0, re-rank the timeline by weighted engagement (likes×1 + retweets×3 + replies×2 + bookmarks×5 + log10(views+1)×0.5) and return the top N. Default 0 keeps X's native ordering."
+      }
+    ],
+    "columns": [
+      "id",
+      "author",
+      "bio",
+      "text",
+      "likes",
+      "retweets",
+      "replies",
+      "views",
+      "created_at",
+      "url",
+      "has_media",
+      "media_urls",
+      "media_posters",
+      "card",
+      "quoted_tweet"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter timeline -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/trending",
+    "site": "twitter",
+    "name": "trending",
+    "aliases": [],
+    "description": "Twitter/X trending topics",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 20,
+        "help": "Number of trends to show"
+      }
+    ],
+    "columns": [
+      "rank",
+      "topic",
+      "category"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter trending -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/tweets",
+    "site": "twitter",
+    "name": "tweets",
+    "aliases": [],
+    "description": "Fetch a Twitter user's most recent tweets (chronological, excludes pinned; defaults to the logged-in user when no username is given)",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [
+      {
+        "name": "username",
+        "type": "string",
+        "required": false,
+        "valueRequired": false,
+        "positional": true,
+        "choices": [],
+        "default": null,
+        "help": "Twitter screen name (with or without @). Defaults to the logged-in user when omitted."
+      },
+      {
+        "name": "limit",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 20,
+        "help": "Max tweets to return (1-10000; fetched across cursor pages)"
+      },
+      {
+        "name": "page-delay",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 2,
+        "help": "Seconds to wait between paginated timeline requests to reduce rate-limit risk. Use 0 to disable."
+      },
+      {
+        "name": "top-by-engagement",
+        "type": "int",
+        "required": false,
+        "valueRequired": false,
+        "positional": false,
+        "choices": [],
+        "default": 0,
+        "help": "When set to N>0, re-rank the tweets by weighted engagement (likes×1 + retweets×3 + replies×2 + bookmarks×5 + log10(views+1)×0.5) and return the top N. Default 0 keeps the chronological ordering."
+      }
+    ],
+    "columns": [
+      "id",
+      "author",
+      "created_at",
+      "is_retweet",
+      "text",
+      "likes",
+      "retweets",
+      "replies",
+      "views",
+      "url",
+      "has_media",
+      "media_urls",
+      "media_posters",
+      "quoted_tweet"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter tweets -f yaml",
+    "defaultFormat": null,
+    "siteSession": null
+  },
+  {
+    "command": "twitter/whoami",
+    "site": "twitter",
+    "name": "whoami",
+    "aliases": [],
+    "description": "Show the current logged-in twitter account",
+    "access": "read",
+    "strategy": "cookie",
+    "browser": true,
+    "args": [],
+    "columns": [
+      "logged_in",
+      "site",
+      "username",
+      "url"
+    ],
+    "domain": "x.com",
+    "example": "opencli twitter whoami -f yaml",
+    "defaultFormat": null,
+    "siteSession": "persistent"
+  }
+]
