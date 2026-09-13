@@ -6,23 +6,23 @@
 
 ```sh
 npm install -g bb-browser
-git clone https://github.com/kerrmoulton/bb-sites.git
+git clone -b develop https://github.com/kerrmoulton/bb-sites.git
 cd bb-sites
-python3 tools/x-read/install.py
+python3 tools/install.py
 ~/.local/bin/bb-xread tweets follow_clues --limit 20
 ```
 
 已经安装 BB Browser 时可跳过第一行。Python 3.9+、Git 是安装前提；构建依赖不是安装前提，仓库包含构建好的适配器。Windows 可直接运行安装后的 `python <用户目录>/.bb-browser/x-read/xread.py ...`；本轮实测平台是 macOS，Windows 未验收。
 
-安装器部署20个 `read-*.js`、现有 `_helper.js` 和本地读取入口。更新已有文件前备份到 `~/.bb-browser/x-read-backups/`，并记录来源/哈希。不会复制登录态或修改 Chrome 配置。账号需要登录时请在 BB 浏览器手动登录 X。
+develop安装器部署20个 `read-*.js`、YouTube字幕适配器、现有 `_helper.js` 和本地读取入口。更新已有文件前备份到 `~/.bb-browser/x-read-backups/`，并记录来源/哈希。不会复制登录态或修改 Chrome 配置。账号需要登录时请在 BB 浏览器手动登录 X。
 
 后续更新自己的增强版：
 
 ```sh
 cd bb-sites
 git pull --ff-only
-python3 tools/x-read/install.py
-python3 tools/x-read/install.py --check
+python3 tools/install.py
+python3 tools/install.py --check
 ```
 
 `bb-browser site update` 更新社区目录；本安装器写入私有 `~/.bb-browser/sites/`，因此社区更新不会覆盖这些文件。**调用增强版请使用 `bb-xread` 或 `twitter/read-*`。** 原来 `twitter/tweets` 等旧名字及返回结构保持原样；尤其旧 `twitter/following` 是主页关注流，增强版 `read-following` 是某用户的关注名单。

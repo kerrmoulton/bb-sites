@@ -8,15 +8,17 @@ Each site adapter is a JS function that runs inside your browser via `bb-browser
 
 > **102 adapters** across **36 platforms** — and growing.
 
+The default installation/development branch is **develop**; **main** mirrors upstream. Develop combines the repaired X suite and the earlier YouTube transcript API adapter. [Branch and upstream-sync workflow](BRANCHING.md).
+
 ## This fork: repaired X read adapters
 
 This fork includes 20 repaired X read adapters, buildable sources, regression tests and an installer. BB Browser itself is unchanged. Use `bb-xread` or `twitter/read-*` for the enhanced commands; legacy adapter names retain their previous behavior.
 
 ```sh
 npm install -g bb-browser
-git clone https://github.com/kerrmoulton/bb-sites.git
+git clone -b develop https://github.com/kerrmoulton/bb-sites.git
 cd bb-sites
-python3 tools/x-read/install.py
+python3 tools/install.py
 ~/.local/bin/bb-xread tweets follow_clues --limit 20
 ```
 

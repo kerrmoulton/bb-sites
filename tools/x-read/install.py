@@ -52,6 +52,7 @@ def main():
             parser.error('Invalid command name')
         plan.append((REPO / 'twitter' / f'read-{name}.js', bb_home / 'sites/twitter' / f'read-{name}.js'))
     plan.append((REPO / 'twitter/_helper.js', bb_home / 'sites/twitter/_helper.js'))
+    plan.append((REPO / 'youtube/transcript.js', bb_home / 'sites/youtube/transcript.js'))
     for name in ('xread.py', 'commands.json', 'OPENCLI-LICENSE.txt', 'NOTICE.md'):
         plan.append((ROOT / name, bb_home / 'x-read' / name))
     prepared = []
@@ -94,13 +95,14 @@ def main():
     version = subprocess.run(['git', '-C', str(REPO), 'rev-parse', 'HEAD'], capture_output=True, text=True)
     receipt = {'installed_at': datetime.datetime.now().astimezone().isoformat(),
                'source': 'https://github.com/kerrmoulton/bb-sites',
+               'branch': 'develop',
                'commit': version.stdout.strip() if version.returncode == 0 else None,
                'manifest_sha256': digest((ROOT / 'manifest.json').read_bytes()),
-               'adapter_count': 20, 'changed_files': len(changed),
+               'adapter_count': 21, 'x_read_adapter_count': 20, 'changed_files': len(changed),
                'backup': str(backup) if previous else None,
                'files': {str(t): digest(data) for t, data, _ in prepared}}
     atomic_write(bb_home / 'x-read/installation.json', (json.dumps(receipt, indent=2) + '\n').encode())
-    print(json.dumps({'ok': True, 'adapter_count': 20, 'changed_files': len(changed),
+    print(json.dumps({'ok': True, 'adapter_count': 21, 'x_read_adapter_count': 20, 'changed_files': len(changed),
                       'backup': receipt['backup'], 'command': str(bin_dir / 'bb-xread')}, indent=2))
     print('Try: ' + str(bin_dir / 'bb-xread') + ' tweets follow_clues --limit 20')
     return 0

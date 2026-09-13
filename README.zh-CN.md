@@ -8,15 +8,18 @@
 
 > **102 个适配器**，覆盖 **36 个平台** — 持续增长中。
 
+
+默认使用 **develop** 开发和安装；**main** 只镜像上游。develop已经整合X增强套件和之前的YouTube字幕API修改。[分支与同步流程](BRANCHING.md)。
+
 ## 此 fork：修复后的 X 只读适配器
 
 包含20个增强版X适配器、可重建源码、回归测试和安装器。使用 `bb-xread` 或 `twitter/read-*` 调用增强版；原有命令保持兼容，BB Browser核心没有改动。
 
 ```sh
 npm install -g bb-browser
-git clone https://github.com/kerrmoulton/bb-sites.git
+git clone -b develop https://github.com/kerrmoulton/bb-sites.git
 cd bb-sites
-python3 tools/x-read/install.py
+python3 tools/install.py
 ~/.local/bin/bb-xread tweets follow_clues --limit 20
 ```
 

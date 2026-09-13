@@ -95,6 +95,7 @@ class InstallTests(unittest.TestCase):
             r = subprocess.run(args, capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stderr)
             self.assertEqual(len(list((bb_home / 'sites/twitter').glob('read-*.js'))), 20)
+            self.assertEqual((bb_home / 'sites/youtube/transcript.js').read_bytes(), (ROOT.parent.parent / 'youtube/transcript.js').read_bytes())
             receipt = json.loads((bb_home / 'x-read/installation.json').read_text())
             restore = json.loads((Path(receipt['backup']) / 'restore-map.json').read_text())
             self.assertEqual(Path(restore[0]['backup']).read_text(), 'previous-adapter')

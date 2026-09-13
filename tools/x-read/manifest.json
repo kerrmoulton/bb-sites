@@ -25,6 +25,7 @@
     "twitter/read-timeline.js": "264104b8854c82cdbf2b8cb170d6f0eaa9108ad5cd87fe1bffd0495af28a0970",
     "twitter/read-trending.js": "a686bccb17517381089b1d9e140f3b4cca8ce02e29af47d6d6a6e867e76aa654",
     "twitter/read-tweets.js": "6be2d061a843f289a05dbed9037414b4a078267d83844589f4853899c6a62496",
-    "twitter/read-whoami.js": "e7e31bd07ff1c69ca8d61c939f1559ae952625ca4c51281a588b040404c77629"
+    "twitter/read-whoami.js": "e7e31bd07ff1c69ca8d61c939f1559ae952625ca4c51281a588b040404c77629",
+    "youtube/transcript.js": "e952bfac4508f8229e0c2d5a9d7e3f8b9edc72f8da6d1a8bbae888b1c8668c66"
   }
 }
