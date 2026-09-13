@@ -97,3 +97,9 @@ python3 -m unittest discover -s tests -p '*_test.py'
 ```
 
 `build.mjs`静态打包源代码并更新安装清单，不会触碰正在使用的浏览器。原始OpenCLI字符串eval已在实验中转换为函数，构建不依赖动态Function或CSP例外。源码和许可说明见[NOTICE](../tools/x-read/NOTICE.md)。修改后请运行安装器更新已安装的私有副本。
+
+## 单页历史数据接口
+
+`python3 tools/install.py` 额外安装 `twitter/history-page` 单页数据适配器，返回游标、限流信息与只读结果。源码及测试在 [history-adapter](../tools/history-adapter/README.md)。
+
+SQLite、限速、断点续传、worker、增量及导出已迁到独立的 [bb-xarchive](https://github.com/kerrmoulton/bb-xarchive) 仓库，需分别安装和更新。BB Sites不再安装或更新`bb-xarchive`命令。现有20个read命令保持兼容。

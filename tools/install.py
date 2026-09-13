@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-"""Install the develop branch's X read suite and YouTube transcript adapter."""
+"""Install this fork's selected X and YouTube adapters."""
 from pathlib import Path
 import runpy
-
-runpy.run_path(str(Path(__file__).resolve().parent / 'x-read/install.py'), run_name='__main__')
+for relative in ('x-read/install.py', 'history-adapter/install.py'):
+    try:
+        runpy.run_path(str(Path(__file__).resolve().parent / relative), run_name='__main__')
+    except SystemExit as exc:
+        if exc.code:
+            raise
